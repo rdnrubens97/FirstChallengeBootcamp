@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class Dev {
@@ -8,6 +9,29 @@ public class Dev {
     private String name;
     private Set<Content> subscribedContents = new LinkedHashSet<>();
     private Set<Content> finishedContents = new LinkedHashSet<>();
+
+    public void subscribeBootcamp(Bootcamp bootcamp){
+        this.subscribedContents.addAll(bootcamp.getContents());
+        bootcamp.getSubscribedDevs().add(this);
+    }
+
+    public void toProgress(){
+        Optional<Content> content = this.subscribedContents.stream().findFirst();
+        if (content.isPresent()){
+            this.finishedContents.add(content.get());
+            this.subscribedContents.remove(content.get());            
+        }
+        else{
+            System.out.println("You do not have any active content");
+        }
+    }
+
+    public Double calculateTotalXP(){
+        return this.finishedContents
+               .stream()
+               .mapToDouble(Content::calculateXp)
+               .sum(); 
+    }
 
     public String getName() {
         return name;
@@ -31,7 +55,7 @@ public class Dev {
 
     public void setFinishedContents(Set<Content> finishedContents) {
         this.finishedContents = finishedContents;
-    }
+    }   
 
     @Override
     public int hashCode() {
@@ -68,9 +92,6 @@ public class Dev {
         } else if (!finishedContents.equals(other.finishedContents))
             return false;
         return true;
-    }
-    
-
-    
+    }       
     
 }

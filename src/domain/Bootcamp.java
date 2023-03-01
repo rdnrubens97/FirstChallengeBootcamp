@@ -9,10 +9,10 @@ public class Bootcamp {
     
     private String name;
     private String description;
-    private LocalDate initialDate = LocalDate.now();
-    private LocalDate finalDate = initialDate.plusDays(45);
+    private final LocalDate initialDate = LocalDate.now();
+    private final LocalDate finalDate = initialDate.plusDays(45);
     private Set<Dev> subscribedDevs = new HashSet<>();
-    private Set<Dev> contents = new LinkedHashSet<>();
+    private Set<Content> contents = new LinkedHashSet<>();
     
     public String getName() {
         return name;
@@ -30,22 +30,6 @@ public class Bootcamp {
         this.description = description;
     }
 
-    public LocalDate getInitialDate() {
-        return initialDate;
-    }
-
-    public void setInitialDate(LocalDate initialDate) {
-        this.initialDate = initialDate;
-    }
-
-    public LocalDate getFinalDate() {
-        return finalDate;
-    }
-
-    public void setFinalDate(LocalDate finalDate) {
-        this.finalDate = finalDate;
-    }
-
     public Set<Dev> getSubscribedDevs() {
         return subscribedDevs;
     }
@@ -54,11 +38,11 @@ public class Bootcamp {
         this.subscribedDevs = subscribedDevs;
     }
 
-    public Set<Dev> getContents() {
+    public Set<Content> getContents() {
         return contents;
     }
 
-    public void setContents(Set<Dev> contents) {
+    public void setContents(Set<Content> contents) {
         this.contents = contents;
     }
 
